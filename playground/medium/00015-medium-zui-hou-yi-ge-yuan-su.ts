@@ -24,7 +24,8 @@
 
 /* _____________ 你的代码 _____________ */
 
-type Last<T extends any[]> = any
+type Last<T extends any[]> = T extends [...infer _, infer R] ? R : never
+// type Last<T extends any[]> = [any, ...T][T["length"]];// 666，通过错开一位获得length -1求得最后一项
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
