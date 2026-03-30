@@ -25,8 +25,7 @@
 */
 
 /* _____________ 你的代码 _____________ */
-
-type Pop<T extends any[]> = any
+type Pop<T extends any[]> = T extends [...infer I, infer _] ? I : []
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
