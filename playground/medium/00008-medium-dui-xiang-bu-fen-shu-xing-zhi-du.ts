@@ -34,7 +34,14 @@
 
 /* _____________ 你的代码 _____________ */
 
-type MyReadonly2<T, K> = any
+// your answers
+
+type MyReadonly2<T, K extends keyof T = keyof T> = {
+  readonly [key in keyof T as key extends K ? key : never]: T[key];
+} & {
+    [key in keyof T as key extends K ? never : key]: T[key];
+  }
+
 
 /* _____________ 测试用例 _____________ */
 import type { Alike, Expect } from '@type-challenges/utils'
