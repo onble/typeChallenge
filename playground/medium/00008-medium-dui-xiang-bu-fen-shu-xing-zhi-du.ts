@@ -41,7 +41,8 @@ type MyReadonly2<T, K extends keyof T = keyof T> = {
 } & {
     [key in keyof T as key extends K ? never : key]: T[key];
   }
-
+  // type MyReadonly2<T, K extends keyof T = keyof T> = 
+  // Readonly<Pick<T, K>> & Omit<T, K>
 
 /* _____________ 测试用例 _____________ */
 import type { Alike, Expect } from '@type-challenges/utils'
