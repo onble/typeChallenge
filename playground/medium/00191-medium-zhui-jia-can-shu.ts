@@ -23,7 +23,7 @@
 
 /* _____________ 你的代码 _____________ */
 
-type AppendArgument<Fn, A> = any
+type AppendArgument<Fn, A> = Fn extends (...args: infer Args) => infer ReturnType ? (...args: [...Args, A]) => ReturnType : never
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
