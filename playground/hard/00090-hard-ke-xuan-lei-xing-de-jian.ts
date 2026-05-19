@@ -12,7 +12,7 @@
 
 /* _____________ 你的代码 _____________ */
 
-type OptionalKeys<T> = any
+type OptionalKeys<T> = {[P in keyof T]-?: {} extends Pick<T,P> ? P:never}[keyof T]
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
@@ -30,3 +30,11 @@ type cases = [
   > 查看解答：https://tsch.js.org/90/solutions
   > 更多题目：https://tsch.js.org/zh-CN
 */
+
+/** 若 T 上存在任意可选属性则为 true，否则为 false */
+type HasOptionalKeys<T> = [OptionalKeys<T>] extends [never] ? false : true
+
+type A = HasOptionalKeys<{ x: number; y?: string }> // true
+type B = HasOptionalKeys<{ x: number; y: string }> // false
+type C = HasOptionalKeys<{ x: undefined; y?: undefined }> // true（y 可选）
+type D = HasOptionalKeys<{}> // false
