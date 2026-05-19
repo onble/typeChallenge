@@ -19,7 +19,9 @@
 
 /* _____________ 你的代码 _____________ */
 
-type AppendToObject<T, U, V> = any
+  type AppendToObject<T, U extends string, V> = {
+    [K in ((keyof T )| U)]: K extends keyof T ? T[K] : V
+  }
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
@@ -60,6 +62,8 @@ type testExpect3 = {
   sun: false
   moon: false | undefined
 }
+
+type answer = AppendToObject<test1, 'home', boolean>
 
 type cases = [
   Expect<Equal<AppendToObject<test1, 'home', boolean>, testExpect1>>,
