@@ -28,8 +28,12 @@
 
 /* _____________ 你的代码 _____________ */
 
-type Merge<F, S> = any
-
+type Merge<F, S> = {
+  [K in keyof F | keyof S]: K extends keyof S ? S[K] : K extends keyof F ? F[K] : never;
+}
+// type Merge<F extends Record<string, any>, S extends Record<string, any>> = {
+//   [k in keyof (F & S)]: k extends keyof S ? S[k] : (F & S)[k]
+//  }
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
 
