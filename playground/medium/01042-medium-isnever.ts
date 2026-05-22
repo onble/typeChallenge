@@ -23,7 +23,18 @@
 
 /* _____________ 你的代码 _____________ */
 
-type IsNever<T> = any
+// type IsNever<T> = T extends never ? true : false;
+type IsNever<T> = [T] extends [never] ? true : false 
+
+type test1 = never extends never ? true : false;
+type test2 = [never] extends [never] ? true : false;
+
+// TypeScript 有一条铁律：
+// 当泛型参数 T = never 时，直接使用 T extends ... 会直接跳过条件判断，整体返回 never这叫 never 会在分布式条件类型中直接消失
+
+// 为什么 [T] extends [never] 就可以？
+// 因为：被 [] 包裹后，分布式条件类型被关闭了！
+
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
