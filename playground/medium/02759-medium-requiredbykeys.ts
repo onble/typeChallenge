@@ -27,7 +27,16 @@
 
 /* _____________ 你的代码 _____________ */
 
-type RequiredByKeys<T, K> = any
+type MergeType<O> = {
+  [P in keyof O]: O[P]
+}
+
+
+type RequiredByKeys<T, K extends keyof T = keyof T> = MergeType<{
+  [P in keyof T as P extends K ? P : never]-?: T[P]
+} & {
+  [P in keyof T as P extends K ? never : P]: T[P]
+}>
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
