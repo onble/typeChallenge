@@ -23,7 +23,16 @@
 
 /* _____________ 你的代码 _____________ */
 
-type ObjectEntries<T> = any
+// type ObjectEntries<T, U = Required<T>> = {
+//   [K in keyof U]: [K, U[K] extends never ? undefined : U[K]]
+// }[keyof U]
+
+type ObjectEntries<T> = {
+  [K in keyof T]-?: [K, T[K]]
+}[keyof T]
+
+type test1 = ObjectEntries<Model>
+type test2 = ObjectEntries<Partial<Model>>
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
