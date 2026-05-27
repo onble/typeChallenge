@@ -18,7 +18,12 @@
 
 /* _____________ 你的代码 _____________ */
 
-type DropChar<S, C> = any
+type Fun<T,C> = T extends C ? '':C;
+
+// type DropChar<S, C extends string> = S extends `${infer L}${C}${infer R}` ? DropChar<`${L}${R}`, C> : S;
+
+// your answers
+type DropChar<S, C> = S extends `${infer X}${infer Y}` ? `${X extends C ? "" : X}${DropChar<Y, C>}` : ""
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
