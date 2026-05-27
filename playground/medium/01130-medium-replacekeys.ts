@@ -45,7 +45,9 @@
 
 /* _____________ 你的代码 _____________ */
 
-type ReplaceKeys<U, T, Y> = any
+type ReplaceKeys<U, T, Y> = {
+  [K in keyof U]: K extends T ? (K extends keyof Y ? Y[K] : never) : U[K]
+}
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
