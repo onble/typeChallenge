@@ -25,8 +25,16 @@
 
 /* _____________ 你的代码 _____________ */
 
-type Mutable<T> = any
+// type Mutable<T extends Record<string, any> > = {
+//   -readonly [K in keyof T]: T[K]
+// }
 
+type Mutable<T extends object> = {
+  -readonly [K in keyof T]: T[K]
+}
+
+
+type test1 = Mutable<Readonly<Todo1>>
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
 
