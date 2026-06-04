@@ -16,7 +16,7 @@
 
 /* _____________ 你的代码 _____________ */
 
-type BEM<B extends string, E extends string[], M extends string[]> = any
+type BEM<B extends string, E extends string[], M extends string[]> = `${B}${E extends [] ? '' : `__${E[number]}`}${M extends [] ? '' : `--${M[number]}`}`
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
