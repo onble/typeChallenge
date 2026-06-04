@@ -19,8 +19,15 @@
 */
 
 /* _____________ 你的代码 _____________ */
+type Flip<T extends Record<PropertyKey, string | number | boolean>> = {
+  [K in keyof T as `${T[K]}`]: K
+}
 
-type Flip<T> = any
+// type Flip<T extends Record<any, any>> = {
+//   [key in keyof T as T[key] | `${T[key]}`]: key
+// }
+type test1 = Flip<{ a: "x", b: "y", c: "z" }>
+
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect, NotEqual } from '@type-challenges/utils'
